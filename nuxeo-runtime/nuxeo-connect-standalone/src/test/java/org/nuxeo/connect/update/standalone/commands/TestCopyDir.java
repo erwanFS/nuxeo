@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
@@ -66,7 +67,7 @@ public class TestCopyDir extends AbstractCommandTest {
         org.apache.commons.io.FileUtils.touch(deprecatedFile);
         newFile = new File(bundles, newFilename);
         snapshotFile = new File(bundles, snapshotFilename);
-        FileUtils.writeStringToFile(snapshotFile, "old SNAPSHOT content");
+        FileUtils.writeStringToFile(snapshotFile, "old SNAPSHOT content", StandardCharsets.UTF_8);
     }
 
     @Override

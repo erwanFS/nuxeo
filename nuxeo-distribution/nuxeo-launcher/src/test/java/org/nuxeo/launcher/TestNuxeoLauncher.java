@@ -26,6 +26,7 @@ import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -40,7 +41,6 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.io.Charsets;
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Rule;
@@ -164,7 +164,7 @@ public class TestNuxeoLauncher extends AbstractConfigurationTest {
         final NuxeoLauncher launcher = NuxeoLauncher.createLauncher(args);
         InstanceInfo info = launcher.getInfo();
         assertNotNull("Failed to get instance info", info);
-        List<String> clidLines = Files.readAllLines(instanceClid, Charsets.UTF_8);
+        List<String> clidLines = Files.readAllLines(instanceClid, StandardCharsets.UTF_8);
         LogicalInstanceIdentifier expectedClid = new LogicalInstanceIdentifier(clidLines.get(0)
                 + LogicalInstanceIdentifier.ID_SEP + clidLines.get(1), "expected clid");
         assertEquals("Not the right instance.clid file: ", expectedClid.getCLID(), info.clid);

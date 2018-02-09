@@ -25,8 +25,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.Writer;
-import java.util.Arrays;
+import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.List;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -83,10 +85,10 @@ public class SassCssFlavorProcessor extends AbstractFlavorProcessor {
                     }
                 }
 
-                InputSource source = null;
+                InputSource source;
                 if (StringUtils.isNoneBlank(varContents)) {
                     byte[] varBytes = varContents.getBytes();
-                    byte[] initalBytes = IOUtils.toByteArray(reader);
+                    byte[] initalBytes = IOUtils.toByteArray(reader, StandardCharsets.UTF_8);
                     reader.close();
                     byte[] finalBytes = ArrayUtils.addAll(varBytes, initalBytes);
                     finalReader = new InputStreamReader(new ByteArrayInputStream(finalBytes));
@@ -110,7 +112,7 @@ public class SassCssFlavorProcessor extends AbstractFlavorProcessor {
                 }
 
                 stylesheet.setCharset(getEncoding());
-                stylesheet.addSourceUris(Arrays.asList(resource.getUri()));
+                stylesheet.addSourceUris(Collections.singletonList(resource.getUri()));
 
                 stylesheet.compile();
 

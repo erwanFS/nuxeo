@@ -26,6 +26,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -123,7 +124,7 @@ public class TestFilesystemBlobProvider {
         assertNotNull(blob);
         assertEquals(key, blob.getKey());
         try (InputStream in = blob.getStream()) {
-            assertEquals(CONTENT, IOUtils.toString(in));
+            assertEquals(CONTENT, IOUtils.toString(in, StandardCharsets.UTF_8));
         }
 
         // same with explicit blob
@@ -136,7 +137,7 @@ public class TestFilesystemBlobProvider {
         assertEquals(CONTENT.length(), blob.getLength());
         assertEquals(CONTENT_MD5, blob.getDigest());
         try (InputStream in = blob.getStream()) {
-            assertEquals(CONTENT, IOUtils.toString(in));
+            assertEquals(CONTENT, IOUtils.toString(in, StandardCharsets.UTF_8));
         }
     }
 
@@ -182,7 +183,7 @@ public class TestFilesystemBlobProvider {
             assertNotNull(blob);
             assertEquals(key, blob.getKey());
             try (InputStream in = blob.getStream()) {
-                assertEquals(CONTENT, IOUtils.toString(in));
+                assertEquals(CONTENT, IOUtils.toString(in, StandardCharsets.UTF_8));
             }
         } finally {
             ((BlobManagerComponent) blobManager).unregisterBlobProvider(descr);

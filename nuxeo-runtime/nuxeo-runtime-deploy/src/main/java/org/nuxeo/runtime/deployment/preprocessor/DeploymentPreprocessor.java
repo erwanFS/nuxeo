@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -356,7 +357,7 @@ public class DeploymentPreprocessor {
             if (td.template != null) {
                 File file = new File(td.baseDir, td.installPath);
                 file.getParentFile().mkdirs(); // make sure parents exists
-                FileUtils.writeStringToFile(file, td.template.getText());
+                FileUtils.writeStringToFile(file, td.template.getText(), StandardCharsets.UTF_8);
             }
         }
 

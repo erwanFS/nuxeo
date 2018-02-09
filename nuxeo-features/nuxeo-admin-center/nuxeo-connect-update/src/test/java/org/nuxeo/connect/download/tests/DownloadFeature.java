@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.FileUtils;
 import org.nuxeo.runtime.test.WorkingDirectoryConfigurator;
@@ -54,7 +55,7 @@ public class DownloadFeature extends SimpleFeature implements WorkingDirectoryCo
         }
 
         File data = new File(workingDir, "web/root.war/test.data");
-        FileUtils.writeStringToFile(data, "TestMe");
+        FileUtils.writeStringToFile(data, "TestMe", StandardCharsets.UTF_8);
     }
 
     private static URL getResource(String resource) {

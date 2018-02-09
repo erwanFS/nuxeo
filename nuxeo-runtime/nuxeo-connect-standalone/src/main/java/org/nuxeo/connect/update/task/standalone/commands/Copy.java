@@ -23,6 +23,7 @@ package org.nuxeo.connect.update.task.standalone.commands;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
@@ -235,7 +236,7 @@ public class Copy extends AbstractCommand {
                         rfile.close();
                     }
                 }
-                FileUtils.writeStringToFile(dst, content, append);
+                FileUtils.writeStringToFile(dst, content, StandardCharsets.UTF_8, append);
             } else {
                 File tmp = new File(dst.getPath() + ".tmp");
                 org.nuxeo.common.utils.FileUtils.copy(fileToCopy, tmp);
@@ -281,7 +282,7 @@ public class Copy extends AbstractCommand {
         }
         if (append) {
             try {
-                return FileUtils.readFileToString(fileToCopy);
+                return FileUtils.readFileToString(fileToCopy, StandardCharsets.UTF_8);
             } catch (IOException e) {
                 throw new PackageException("Couldn't read " + fileToCopy.getName(), e);
             }

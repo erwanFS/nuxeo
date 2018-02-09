@@ -26,6 +26,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -192,7 +193,7 @@ public class TestRollback extends SharedFilesTest {
     @Test
     public void testHotfixUninstall() throws Exception {
         final String BASEFILENAME = JARNAME + "-5.6.jar";
-        FileUtils.writeStringToFile(new File(bundles, BASEFILENAME), BASEFILENAME);
+        FileUtils.writeStringToFile(new File(bundles, BASEFILENAME), BASEFILENAME, StandardCharsets.UTF_8);
         UpdateManager mgr = getManager();
         assertEquals(0, mgr.getRegistry().size());
         ensureFiles(BASEFILENAME);

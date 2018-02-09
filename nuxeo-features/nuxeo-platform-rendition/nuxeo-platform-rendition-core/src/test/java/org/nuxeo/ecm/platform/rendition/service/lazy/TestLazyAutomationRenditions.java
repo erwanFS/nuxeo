@@ -24,6 +24,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.nio.charset.StandardCharsets;
+
 import org.apache.commons.io.IOUtils;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -106,7 +108,7 @@ public class TestLazyAutomationRenditions {
         blob = rendition.getBlob();
         assertFalse(blob.getMimeType().contains("empty=true"));
         assertEquals("dummy.txt", blob.getFilename());
-        String data = IOUtils.toString(blob.getStream());
+        String data = IOUtils.toString(blob.getStream(), StandardCharsets.UTF_8);
         assertEquals("dummy", data);
     }
 

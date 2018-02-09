@@ -24,6 +24,7 @@ import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.List;
 
@@ -151,7 +152,8 @@ public class AddItemToListPropertyTest {
     protected String readPropertiesFromFile(String filename) throws IOException {
         File fieldsAsJsonFile = FileUtils.getResourceFileFromContext(filename);
         assertNotNull(fieldsAsJsonFile);
-        String fieldsDataAsJson = org.apache.commons.io.FileUtils.readFileToString(fieldsAsJsonFile);
+        String fieldsDataAsJson = org.apache.commons.io.FileUtils.readFileToString(fieldsAsJsonFile,
+                StandardCharsets.UTF_8);
         fieldsDataAsJson = fieldsDataAsJson.replaceAll("\n", "");
         fieldsDataAsJson = fieldsDataAsJson.replaceAll("\r", "");
 

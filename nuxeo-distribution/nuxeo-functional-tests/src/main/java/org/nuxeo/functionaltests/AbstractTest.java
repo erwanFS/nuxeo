@@ -35,6 +35,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -656,7 +657,7 @@ public abstract class AbstractTest {
         // Create tmp file, deleted on exit
         File tmpFile = Framework.createTempFile(filePrefix, fileSuffix);
         tmpFile.deleteOnExit();
-        FileUtils.writeStringToFile(tmpFile, fileContent);
+        FileUtils.writeStringToFile(tmpFile, fileContent, StandardCharsets.UTF_8);
         assertTrue(tmpFile.exists());
 
         // Check file URI protocol

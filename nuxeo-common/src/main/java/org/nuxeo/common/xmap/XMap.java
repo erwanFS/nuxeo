@@ -27,6 +27,7 @@ import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Hashtable;
@@ -518,7 +519,7 @@ public class XMap {
 
     public void toXML(Object object, File file) throws IOException {
         String xml = toXML(object);
-        FileUtils.writeStringToFile(file, xml);
+        FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
     }
 
     public void toXML(Object object, Element root) {

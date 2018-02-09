@@ -23,6 +23,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -91,7 +92,8 @@ public class RemoveItemFromListPropertyTest {
         // Get new fields from json file to String
         File fieldsAsJsonFile = FileUtils.getResourceFileFromContext("newFields.json");
         assertNotNull(fieldsAsJsonFile);
-        String fieldsDataAsJSon = org.apache.commons.io.FileUtils.readFileToString(fieldsAsJsonFile);
+        String fieldsDataAsJSon = org.apache.commons.io.FileUtils.readFileToString(fieldsAsJsonFile,
+                StandardCharsets.UTF_8);
         fieldsDataAsJSon = fieldsDataAsJSon.replaceAll("\n", "");
         fieldsDataAsJSon = fieldsDataAsJSon.replaceAll("\r", "");
 
@@ -99,7 +101,6 @@ public class RemoveItemFromListPropertyTest {
         OperationContext ctx = new OperationContext(coreSession);
         ctx.setInput(doc);
         OperationChain chain = new OperationChain("testChain");
-        chain = new OperationChain("testChain");
         chain.add(AddItemToListProperty.ID).set("xpath", "ds:fields").set("complexJsonProperties", fieldsDataAsJSon);
 
         doc = (DocumentModel) service.run(ctx, chain);

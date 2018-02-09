@@ -31,6 +31,7 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.Date;
@@ -111,7 +112,7 @@ public abstract class AbstractAutomationClientTest {
 
     protected File newFile(String content) throws IOException {
         File file = Framework.createTempFile("automation-test-\u00e9\u00e1\u00f2-", ".xml");
-        FileUtils.writeStringToFile(file, content);
+        FileUtils.writeStringToFile(file, content, StandardCharsets.UTF_8);
         return file;
     }
 

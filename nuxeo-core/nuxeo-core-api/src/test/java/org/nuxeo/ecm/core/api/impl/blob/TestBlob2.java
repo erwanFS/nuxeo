@@ -28,6 +28,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 import org.apache.commons.io.IOUtils;
@@ -90,7 +91,7 @@ public class TestBlob2 {
         assertTrue(Arrays.equals("some content".getBytes(), blob.getByteArray()));
 
         try (InputStream in = blob.getStream()) {
-            String result = IOUtils.toString(in);
+            String result = IOUtils.toString(in, StandardCharsets.UTF_8);
             assertEquals("some content", result);
         }
 

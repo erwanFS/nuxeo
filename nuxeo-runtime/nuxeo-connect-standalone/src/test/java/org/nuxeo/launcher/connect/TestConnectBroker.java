@@ -25,6 +25,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -1139,7 +1140,7 @@ public class TestConnectBroker {
 
         for (String jsonFileName : jsonFileNames) {
             File jsonFile = new File(testStore, jsonFileName);
-            JSONArray array = new JSONArray(FileUtils.readFileToString(jsonFile));
+            JSONArray array = new JSONArray(FileUtils.readFileToString(jsonFile, StandardCharsets.UTF_8));
             Set<String> ids = new HashSet<>();
 
             for (int i = 0; i < array.length(); i++) {

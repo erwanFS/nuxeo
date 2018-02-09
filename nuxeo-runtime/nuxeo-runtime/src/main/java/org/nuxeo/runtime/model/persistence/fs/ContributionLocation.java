@@ -21,8 +21,8 @@ package org.nuxeo.runtime.model.persistence.fs;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
-import org.apache.commons.io.Charsets;
 import org.apache.commons.io.IOUtils;
 import org.nuxeo.runtime.model.persistence.AbstractContribution;
 
@@ -47,7 +47,7 @@ public class ContributionLocation extends AbstractContribution {
     @Override
     public String getContent() {
         try {
-            return IOUtils.toString(location.openStream(), Charsets.UTF_8);
+            return IOUtils.toString(location.openStream(), StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new RuntimeException("Cannot get '".concat(name).concat("' content"), e);
         }

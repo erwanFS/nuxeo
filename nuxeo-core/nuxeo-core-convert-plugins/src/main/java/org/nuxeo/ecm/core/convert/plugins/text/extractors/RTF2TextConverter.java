@@ -23,6 +23,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 import javax.swing.text.BadLocationException;
@@ -50,7 +51,7 @@ public class RTF2TextConverter implements Converter {
             rtfParser.read(blobHolder.getBlob().getStream(), document, 0);
             String text = document.getText(0, document.getLength());
             f = Framework.createTempFile("swing-rtf2text", ".txt");
-            FileUtils.writeStringToFile(f, text);
+            FileUtils.writeStringToFile(f, text, StandardCharsets.UTF_8);
             Blob blob;
             try (InputStream in = new FileInputStream(f)) {
                 blob = Blobs.createBlob(in, "text/plain");

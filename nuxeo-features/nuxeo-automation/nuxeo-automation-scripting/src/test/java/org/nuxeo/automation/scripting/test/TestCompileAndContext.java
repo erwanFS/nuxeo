@@ -30,6 +30,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -104,7 +105,7 @@ public class TestCompileAndContext {
 
             try (InputStream stream = this.getClass().getResourceAsStream("/testScript.js")) {
                 assertNotNull(stream);
-                String js = IOUtils.toString(stream);
+                String js = IOUtils.toString(stream, StandardCharsets.UTF_8);
 
                 CompiledScript compiled = compiler.compile(new StringReader(js));
 
@@ -150,7 +151,7 @@ public class TestCompileAndContext {
         try (AutomationScriptingService.Session session = pool.get(this.session)) {
             try (InputStream stream = this.getClass().getResourceAsStream("/QuickScript.js")) {
                 assertNotNull(stream);
-                String js = IOUtils.toString(stream);
+                String js = IOUtils.toString(stream, StandardCharsets.UTF_8);
 
                 // long t0 = System.currentTimeMillis();
                 session.run(getScriptWithRandomContent(js));
@@ -218,7 +219,7 @@ public class TestCompileAndContext {
             Map<String, Object> data = new HashMap<>();
             data.put("p1", "This is a string");
             data.put("p2", 2);
-            List<String> l = new ArrayList<String>();
+            List<String> l = new ArrayList<>();
             l.add("A");
             l.add("B");
             l.add("C");

@@ -18,24 +18,21 @@
  */
 package org.nuxeo.ecm.automation.core.scripting;
 
-import groovy.lang.Binding;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.io.Serializable;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.commons.io.Charsets;
 import org.apache.commons.io.IOUtils;
 import org.mvel2.MVEL;
-
 import org.nuxeo.ecm.automation.OperationContext;
 import org.nuxeo.ecm.automation.OperationException;
 import org.nuxeo.ecm.automation.context.ContextService;
@@ -44,6 +41,8 @@ import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.DocumentModelList;
 import org.nuxeo.ecm.core.api.NuxeoPrincipal;
 import org.nuxeo.runtime.api.Framework;
+
+import groovy.lang.Binding;
 
 /**
  * @author <a href="mailto:bs@nuxeo.com">Bogdan Stefanescu</a>
@@ -77,10 +76,10 @@ public class Scripting {
         String ext = path.substring(p + 1).toLowerCase();
         try (InputStream in = script.openStream()) {
             if ("mvel".equals(ext)) {
-                Serializable c = MVEL.compileExpression(IOUtils.toString(in, Charsets.UTF_8));
+                Serializable c = MVEL.compileExpression(IOUtils.toString(in, StandardCharsets.UTF_8));
                 cs = new MvelScript(c);
             } else if ("groovy".equals(ext)) {
-                cs = new GroovyScript(IOUtils.toString(in, Charsets.UTF_8));
+                cs = new GroovyScript(IOUtils.toString(in, StandardCharsets.UTF_8));
             } else {
                 throw new OperationException("Unsupported script file: " + script
                         + ". Only MVEL and Groovy scripts are supported");

@@ -23,6 +23,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.InputStream;
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 
 import javax.inject.Inject;
@@ -82,12 +83,12 @@ public class TestBlobDispatcher {
 
         blob1 = (Blob) doc1.getPropertyValue("file:content");
         try (InputStream in = blob1.getStream()) {
-            assertEquals("foo", IOUtils.toString(in));
+            assertEquals("foo", IOUtils.toString(in, StandardCharsets.UTF_8));
         }
 
         blob2 = (Blob) doc2.getPropertyValue("file:content");
         try (InputStream in = blob2.getStream()) {
-            assertEquals("bar", IOUtils.toString(in));
+            assertEquals("bar", IOUtils.toString(in, StandardCharsets.UTF_8));
         }
     }
 

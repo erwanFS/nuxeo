@@ -21,6 +21,7 @@ package org.nuxeo.common.utils;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
@@ -60,10 +61,11 @@ public class TestUserAgent {
     @Test
     public void testSupportedBrowsers() throws Exception {
 
-        List<String> UAs = IOUtils
-                .readLines(this.getClass().getClassLoader().getResourceAsStream("supportedBrowsers.txt"));
-        List<String> BadUAs = IOUtils
-                .readLines(this.getClass().getClassLoader().getResourceAsStream("unsupportedBrowsers.txt"));
+        List<String> UAs = IOUtils.readLines(
+                this.getClass().getClassLoader().getResourceAsStream("supportedBrowsers.txt"), StandardCharsets.UTF_8);
+        List<String> BadUAs = IOUtils.readLines(
+                this.getClass().getClassLoader().getResourceAsStream("unsupportedBrowsers.txt"),
+                StandardCharsets.UTF_8);
 
         for (String UA : UAs) {
             if (!UA.startsWith("#") && !UA.isEmpty()) {

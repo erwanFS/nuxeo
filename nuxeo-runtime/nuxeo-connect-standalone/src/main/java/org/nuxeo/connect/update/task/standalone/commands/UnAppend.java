@@ -22,6 +22,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
@@ -124,7 +125,7 @@ public class UnAppend extends AbstractCommand {
             } else {
                 bak = IOUtils.backup(task.getPackage(), contentToRemove);
             }
-            FileUtils.writeStringToFile(fromFile, linesToKeep.toString());
+            FileUtils.writeStringToFile(fromFile, linesToKeep.toString(), StandardCharsets.UTF_8);
             return new Append(bak, fromFile);
         } catch (PackageException e) {
             throw e;

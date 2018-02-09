@@ -22,7 +22,6 @@
 package org.nuxeo.ecm.platform.layout.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -31,12 +30,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
+import java.nio.charset.StandardCharsets;
 
-import javax.faces.context.FacesContext;
-
-import org.apache.commons.io.Charsets;
 import org.apache.commons.io.IOUtils;
 import org.dom4j.Document;
 import org.dom4j.io.OutputFormat;
@@ -156,7 +151,7 @@ public class TestHelpers extends NXRuntimeTestCase {
     }
 
     protected String read(InputStream in) throws IOException {
-        return IOUtils.toString(in, Charsets.UTF_8);
+        return IOUtils.toString(in, StandardCharsets.UTF_8);
     }
 
     @Test

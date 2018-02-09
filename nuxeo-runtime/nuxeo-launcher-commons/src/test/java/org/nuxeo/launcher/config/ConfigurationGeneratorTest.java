@@ -30,6 +30,7 @@ import static org.nuxeo.launcher.config.ConfigurationGenerator.JVMCHECK_PROP;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -284,7 +285,7 @@ public class ConfigurationGeneratorTest extends AbstractConfigurationTest {
         configGenerator.run();
         File outfile = new File(nuxeoHome, "testfm");
         assertTrue(outfile.exists());
-        String fileContents = FileUtils.readFileToString(outfile).trim();
+        String fileContents = FileUtils.readFileToString(outfile, StandardCharsets.UTF_8).trim();
         assertEquals(fileContents, "Success");
     }
 

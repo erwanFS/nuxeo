@@ -28,6 +28,7 @@ import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -276,7 +277,7 @@ public class OSGiRuntimeService extends AbstractRuntimeService implements Framew
 
         File blacklistFile = new File(env.getConfig(), "blacklist");
         if (blacklistFile.isFile()) {
-            Set<String> lines = FileUtils.readLines(blacklistFile)
+            Set<String> lines = FileUtils.readLines(blacklistFile, StandardCharsets.UTF_8)
                                          .stream()
                                          .map(String::trim)
                                          .filter(line -> !line.isEmpty())

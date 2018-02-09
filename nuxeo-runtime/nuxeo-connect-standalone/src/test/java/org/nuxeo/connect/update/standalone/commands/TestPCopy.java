@@ -25,6 +25,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,7 +45,7 @@ public class TestPCopy extends AbstractCommandTest {
 
     @Override
     protected Map<String, String> getUserProperties() {
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         map.put("v", "value");
         return map;
     }
@@ -54,7 +55,7 @@ public class TestPCopy extends AbstractCommandTest {
         super.installDone(task, error);
         File dst = getTargetFile();
         assertTrue(dst.isFile());
-        assertEquals("test=my value", FileUtils.readFileToString(dst));
+        assertEquals("test=my value", FileUtils.readFileToString(dst, StandardCharsets.UTF_8));
     }
 
     @Override

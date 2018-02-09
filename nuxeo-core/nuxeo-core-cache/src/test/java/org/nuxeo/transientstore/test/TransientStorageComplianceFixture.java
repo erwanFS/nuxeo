@@ -26,6 +26,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -126,7 +127,7 @@ public class TransientStorageComplianceFixture {
         assertEquals("fake.txt", blob.getFilename());
         assertEquals("text/plain", blob.getMimeType());
         assertEquals(DigestUtils.md5Hex("FakeContent"), blob.getDigest());
-        assertEquals("FakeContent", IOUtils.toString(blob.getStream()));
+        assertEquals("FakeContent", IOUtils.toString(blob.getStream(), StandardCharsets.UTF_8));
 
         size = ((AbstractTransientStore) ts).getStorageSize();
         assertEquals(11, size);
@@ -226,7 +227,7 @@ public class TransientStorageComplianceFixture {
         Blob blob = blobs.get(0);
         assertEquals("fake.txt", blob.getFilename());
         assertEquals("text/plain", blob.getMimeType());
-        assertEquals("FakeContent", IOUtils.toString(blob.getStream()));
+        assertEquals("FakeContent", IOUtils.toString(blob.getStream(), StandardCharsets.UTF_8));
 
         // move to deletable entries
         // check that deleted

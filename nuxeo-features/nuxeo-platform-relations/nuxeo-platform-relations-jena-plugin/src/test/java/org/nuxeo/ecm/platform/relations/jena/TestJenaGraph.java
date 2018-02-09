@@ -34,13 +34,13 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.io.Charsets;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.nuxeo.common.utils.FileUtils;
@@ -468,8 +468,8 @@ public class TestJenaGraph extends NXRuntimeTestCase {
         graph.write(out, null, null);
         try (InputStream written = new ByteArrayInputStream(out.toByteArray());
                 InputStream expected = new FileInputStream(getTestFile())) {
-            assertEquals(IOUtils.toString(expected, Charsets.UTF_8).replaceAll("\r?\n", ""),
-                    IOUtils.toString(written, Charsets.UTF_8).replaceAll("\r?\n", ""));
+            assertEquals(IOUtils.toString(expected, StandardCharsets.UTF_8).replaceAll("\r?\n", ""),
+                    IOUtils.toString(written, StandardCharsets.UTF_8).replaceAll("\r?\n", ""));
         }
     }
 
@@ -481,8 +481,8 @@ public class TestJenaGraph extends NXRuntimeTestCase {
         graph.write(path, null, null);
         try (InputStream written = new FileInputStream(new File(path));
                 InputStream expected = new FileInputStream(getTestFile())) {
-            String expectedString = IOUtils.toString(expected, Charsets.UTF_8).replaceAll("\r?\n", "");
-            String writtenString = IOUtils.toString(written, Charsets.UTF_8).replaceAll("\r?\n", "");
+            String expectedString = IOUtils.toString(expected, StandardCharsets.UTF_8).replaceAll("\r?\n", "");
+            String writtenString = IOUtils.toString(written, StandardCharsets.UTF_8).replaceAll("\r?\n", "");
             assertEquals(expectedString, writtenString);
         }
     }

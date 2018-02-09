@@ -21,11 +21,11 @@ package org.nuxeo.ecm.automation.core.rendering;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.apache.commons.io.Charsets;
 import org.apache.commons.io.IOUtils;
 import org.mvel2.templates.CompiledTemplate;
 import org.mvel2.templates.TemplateCompiler;
@@ -56,7 +56,7 @@ public class MvelRender implements Renderer {
                     throw new OperationException("Rendering resource not found: " + name);
                 }
                 try (InputStream in = url.openStream()) {
-                    content = IOUtils.toString(in, Charsets.UTF_8);
+                    content = IOUtils.toString(in, StandardCharsets.UTF_8);
                 }
                 compiled = TemplateCompiler.compileTemplate(content);
                 cache.put(name, compiled);

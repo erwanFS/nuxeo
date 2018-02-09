@@ -19,6 +19,7 @@
 package org.nuxeo.launcher.process;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -100,8 +101,7 @@ public class SolarisProcessManager extends UnixProcessManager {
 
     protected List<String> execute(String... command) throws IOException {
         Process process = new ProcessBuilder(command).start();
-        List<String> lines = IOUtils.readLines(process.getInputStream());
-        return lines;
+        return IOUtils.readLines(process.getInputStream(), StandardCharsets.UTF_8);
     }
 
 }

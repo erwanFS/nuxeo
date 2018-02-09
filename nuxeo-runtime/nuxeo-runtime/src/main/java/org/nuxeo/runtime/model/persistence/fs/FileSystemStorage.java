@@ -21,6 +21,7 @@ package org.nuxeo.runtime.model.persistence.fs;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +60,7 @@ public class FileSystemStorage implements ContributionStorage {
 
     public static synchronized String safeRead(File file) {
         try {
-            return FileUtils.readFileToString(file);
+            return FileUtils.readFileToString(file, StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -67,7 +68,7 @@ public class FileSystemStorage implements ContributionStorage {
 
     public static synchronized void safeWrite(File file, String content) {
         try {
-            FileUtils.writeStringToFile(file, content);
+            FileUtils.writeStringToFile(file, content, StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -78,7 +79,7 @@ public class FileSystemStorage implements ContributionStorage {
             return false;
         }
         try {
-            FileUtils.writeStringToFile(file, content);
+            FileUtils.writeStringToFile(file, content, StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

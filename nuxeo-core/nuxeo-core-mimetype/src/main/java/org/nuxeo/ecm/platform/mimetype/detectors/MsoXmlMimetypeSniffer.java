@@ -22,6 +22,7 @@ package org.nuxeo.ecm.platform.mimetype.detectors;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
@@ -88,7 +89,7 @@ public class MsoXmlMimetypeSniffer implements MagicDetector {
     public String[] guessMsoXml(File file) {
         String[] mimetype = {};
         try {
-            String content = FileUtils.readFileToString(file);
+            String content = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
             if (content.contains("<?mso-application progid=\"Word.Document\"?>")) {
                 String[] type = { getHandledTypes()[1] };
                 mimetype = type;

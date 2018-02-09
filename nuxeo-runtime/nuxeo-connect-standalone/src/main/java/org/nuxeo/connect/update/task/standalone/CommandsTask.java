@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -165,7 +166,7 @@ public abstract class CommandsTask extends AbstractTask {
             String content = parametrizePaths(writer.toString());
             // replace '//' by '/' if any
             content = content.replace(File.separator.concat(File.separator), File.separator);
-            FileUtils.writeStringToFile(file, content);
+            FileUtils.writeStringToFile(file, content, StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new PackageException("Failed to write commands", e);
         }

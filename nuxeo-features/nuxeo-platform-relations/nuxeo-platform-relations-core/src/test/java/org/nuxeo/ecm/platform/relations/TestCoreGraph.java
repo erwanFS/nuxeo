@@ -29,6 +29,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -44,7 +45,6 @@ import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
-import org.apache.commons.io.Charsets;
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -534,8 +534,8 @@ public class TestCoreGraph {
         graph.write(out, null, null);
         InputStream written = new ByteArrayInputStream(out.toByteArray());
         InputStream expected = new FileInputStream(getTestFile());
-        assertEquals(IOUtils.toString(expected, Charsets.UTF_8).replaceAll("\r?\n", ""),
-                IOUtils.toString(written, Charsets.UTF_8).replaceAll("\r?\n", ""));
+        assertEquals(IOUtils.toString(expected, StandardCharsets.UTF_8).replaceAll("\r?\n", ""),
+                IOUtils.toString(written, StandardCharsets.UTF_8).replaceAll("\r?\n", ""));
     }
 
     public void TODOtestWritePath() throws Exception {
@@ -546,8 +546,8 @@ public class TestCoreGraph {
         InputStream written = new FileInputStream(new File(path));
         InputStream expected = new FileInputStream(getTestFile());
 
-        String expectedString = IOUtils.toString(expected, Charsets.UTF_8).replaceAll("\r?\n", "");
-        String writtenString = IOUtils.toString(written, Charsets.UTF_8).replaceAll("\r?\n", "");
+        String expectedString = IOUtils.toString(expected, StandardCharsets.UTF_8).replaceAll("\r?\n", "");
+        String writtenString = IOUtils.toString(written, StandardCharsets.UTF_8).replaceAll("\r?\n", "");
         assertEquals(expectedString, writtenString);
     }
 

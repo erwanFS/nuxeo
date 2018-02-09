@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
@@ -48,7 +49,7 @@ public class TestCopy extends AbstractCommandTest {
     public void setUp() throws Exception {
         super.setUp();
         goldStandardFile = new File(Environment.getDefault().getConfig(), "goldstandard.properties");
-        FileUtils.writeStringToFile(goldStandardFile, "param1=value1");
+        FileUtils.writeStringToFile(goldStandardFile, "param1=value1", StandardCharsets.UTF_8);
     }
 
     @Override

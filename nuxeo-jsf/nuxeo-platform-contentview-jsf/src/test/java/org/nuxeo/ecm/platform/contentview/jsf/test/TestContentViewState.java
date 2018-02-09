@@ -27,6 +27,7 @@ import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -532,7 +533,7 @@ public class TestContentViewState {
         // Attach one file to the list
         File tmpFile = Framework.createTempFile("test", ".txt");
         Framework.trackFile(tmpFile, this);
-        FileUtils.writeStringToFile(tmpFile, "Content");
+        FileUtils.writeStringToFile(tmpFile, "Content", StandardCharsets.UTF_8);
         Blob blob = Blobs.createBlob(tmpFile);
         file.put("file", (Serializable) blob);
         files.add(file);

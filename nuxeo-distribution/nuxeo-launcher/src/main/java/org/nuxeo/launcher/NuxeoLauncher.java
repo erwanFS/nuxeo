@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.SocketTimeoutException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -1352,7 +1353,7 @@ public abstract class NuxeoLauncher {
                 value = console.readLine(message);
             }
         } else { // try reading from stdin
-            value = IOUtils.toString(System.in);
+            value = IOUtils.toString(System.in, StandardCharsets.UTF_8);
             if (value == null || doRegexMatch && !predicate.test(value)) {
                 throw new ConfigurationException(error);
             }
@@ -1370,7 +1371,7 @@ public abstract class NuxeoLauncher {
         if (console != null) {
             return console.readPassword(message);
         } else { // try reading from stdin
-            return IOUtils.toCharArray(System.in);
+            return IOUtils.toCharArray(System.in, StandardCharsets.UTF_8);
         }
     }
 
@@ -1398,7 +1399,7 @@ public abstract class NuxeoLauncher {
         NuxeoClientInstanceType type;
         Console console = System.console();
         if (console == null) {
-            String typeStr = IOUtils.toString(System.in);
+            String typeStr = IOUtils.toString(System.in, StandardCharsets.UTF_8);
             type = NuxeoClientInstanceType.fromString(typeStr);
             if (type == null) {
                 throw new ConfigurationException("Unknown type: " + typeStr);
@@ -1437,7 +1438,7 @@ public abstract class NuxeoLauncher {
         String projectName;
         Console console = System.console();
         if (console == null) {
-            projectName = IOUtils.toString(System.in);
+            projectName = IOUtils.toString(System.in, StandardCharsets.UTF_8);
             ConnectProject project = getConnectRegistrationBroker().getProjectByName(projectName, projects);
             if (project == null) {
                 throw new ConfigurationException("Unknown project: " + projectName);
@@ -1790,7 +1791,7 @@ public abstract class NuxeoLauncher {
                         } else if (Environment.CRYPT_KEY.equals(key) || Environment.CRYPT_KEYSTORE_PASS.equals(key)) {
                             value = Base64.encodeBase64String(IOUtils.toByteArray(System.in));
                         } else {
-                            value = IOUtils.toString(System.in);
+                            value = IOUtils.toString(System.in, StandardCharsets.UTF_8);
                         }
                     } catch (IOException e) {
                         log.debug(e, e);

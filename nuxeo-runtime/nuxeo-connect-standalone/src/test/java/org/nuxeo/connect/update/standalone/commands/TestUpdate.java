@@ -24,6 +24,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
@@ -42,7 +43,7 @@ public class TestUpdate extends AbstractCommandTest {
         super.setUp();
         File bundles = new File(Environment.getDefault().getHome(), "bundles");
         oldJar = new File(bundles, "foo-1.0.jar");
-        FileUtils.writeStringToFile(oldJar, "old JAR content");
+        FileUtils.writeStringToFile(oldJar, "old JAR content", StandardCharsets.UTF_8);
         expectedJar = new File(bundles, "foo-1.1.jar"); // installed by install.xml
     }
 

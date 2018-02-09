@@ -22,6 +22,7 @@ package org.nuxeo.connect.update.standalone;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.BasicFileAttributes;
@@ -102,7 +103,7 @@ public class PackagePersistence {
         Map<String, PackageState> result = new HashMap<>();
         File file = new File(root, ".packages");
         if (file.isFile()) {
-            List<String> lines = FileUtils.readLines(file);
+            List<String> lines = FileUtils.readLines(file, StandardCharsets.UTF_8);
             for (String line : lines) {
                 line = line.trim();
                 if (line.length() == 0 || line.startsWith("#")) {
@@ -133,7 +134,7 @@ public class PackagePersistence {
             buf.append(entry.getKey()).append('=').append(entry.getValue()).append("\n");
         }
         File file = new File(root, ".packages");
-        FileUtils.writeStringToFile(file, buf.toString());
+        FileUtils.writeStringToFile(file, buf.toString(), StandardCharsets.UTF_8);
     }
 
     public LocalPackage getPackage(String id) throws PackageException {

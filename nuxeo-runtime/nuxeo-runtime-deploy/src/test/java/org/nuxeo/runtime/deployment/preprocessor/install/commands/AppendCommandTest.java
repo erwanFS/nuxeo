@@ -23,6 +23,7 @@ import static org.junit.Assert.assertEquals;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
@@ -61,15 +62,15 @@ public class AppendCommandTest {
         File dest = tmp.newFile("dst.json");
         File src1 = tmp.newFile("src1.json");
 
-        FileUtils.writeStringToFile(dest, "{}");
-        FileUtils.writeStringToFile(src1, "{\"key1\":\"value1\"}");
+        FileUtils.writeStringToFile(dest, "{}", StandardCharsets.UTF_8);
+        FileUtils.writeStringToFile(src1, "{\"key1\":\"value1\"}", StandardCharsets.UTF_8);
         append(src1, dest);
 
         ObjectNode json = om.readValue(dest, ObjectNode.class);
         assertEquals("value1", json.get("key1").asText());
 
         File src2 = tmp.newFile("src2.JSON");
-        FileUtils.writeStringToFile(src2, "{\"key1\":\"override\", \"key2\":\"value2\"}");
+        FileUtils.writeStringToFile(src2, "{\"key1\":\"override\", \"key2\":\"value2\"}", StandardCharsets.UTF_8);
         append(src2, dest);
 
         json = om.readValue(dest, ObjectNode.class);
@@ -82,8 +83,8 @@ public class AppendCommandTest {
         File dest = tmp.newFile("dst.properties");
         File src = tmp.newFile("src1.properties");
 
-        FileUtils.writeStringToFile(dest, "key1=value1");
-        FileUtils.writeStringToFile(src, "key2=value2");
+        FileUtils.writeStringToFile(dest, "key1=value1", StandardCharsets.UTF_8);
+        FileUtils.writeStringToFile(src, "key2=value2", StandardCharsets.UTF_8);
         append(src, dest);
 
         Properties props = new Properties();
